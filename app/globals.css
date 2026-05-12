@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f5f0e8;
+  color: #0a0a0a;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: #0a0a0a;
+  color: #f5f0e8;
+}
+
+@layer utilities {
+  .neo-card {
+    @apply border-4 border-black bg-[#fffaf0] shadow-brut;
+  }
+
+  .neo-button {
+    @apply border-4 border-black bg-[#f7d54a] px-5 py-3 font-black uppercase tracking-[0.2em] text-sm shadow-brut transition-transform duration-200;
+  }
+
+  .neo-button:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0 0 #000;
+  }
+}
