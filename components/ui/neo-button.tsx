@@ -1,13 +1,14 @@
 'use client';
 
-import type { AnchorHTMLAttributes, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import type { HTMLMotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/cn';
 
 type NeoButtonProps = {
   children: ReactNode;
   className?: string;
-} & AnchorHTMLAttributes<HTMLAnchorElement>;
+} & HTMLMotionProps<'a'>;
 
 export function NeoButton({ children, className, ...props }: NeoButtonProps) {
   return (
