@@ -1,9 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Arial, Helvetica, sans-serif;
+  --color-ink: #050505;
+  --color-paper: #fff9e8;
+  --color-bone: #f4ecdc;
+  --color-acid: #f6ff00;
+  --color-coral: #ff6b4a;
+  --color-cyan: #48e0ff;
+  --shadow-brut: 8px 8px 0 0 var(--color-ink);
+  --shadow-brut-lg: 14px 14px 0 0 var(--color-ink);
+}
 
 :root {
   color-scheme: light;
+  --cursor-x: 50vw;
+  --cursor-y: 50vh;
 }
 
 html {
@@ -12,27 +24,77 @@ html {
 
 body {
   margin: 0;
-  background: #f5f0e8;
-  color: #0a0a0a;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(5, 5, 5, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(5, 5, 5, 0.06) 1px, transparent 1px),
+    #f4ecdc;
+  background-size: 32px 32px;
+  color: #050505;
   font-family: Arial, Helvetica, sans-serif;
+  text-rendering: geometricPrecision;
 }
 
 ::selection {
-  background: #0a0a0a;
-  color: #f5f0e8;
+  background: #050505;
+  color: #f6ff00;
 }
 
-@layer utilities {
+@utility shadow-brut {
+  box-shadow: var(--shadow-brut);
+}
+
+@utility shadow-brut-lg {
+  box-shadow: var(--shadow-brut-lg);
+}
+
+@layer components {
   .neo-card {
-    @apply border-4 border-black bg-[#fffaf0] shadow-brut;
+    border: 4px solid #050505;
+    background: #fff9e8;
+    box-shadow: var(--shadow-brut);
   }
 
   .neo-button {
-    @apply border-4 border-black bg-[#f7d54a] px-5 py-3 font-black uppercase tracking-[0.2em] text-sm shadow-brut transition-transform duration-200;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #050505;
+    background: #f6ff00;
+    padding: 0.85rem 1.15rem;
+    color: #050505;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-brut);
+    transition:
+      box-shadow 160ms ease,
+      transform 160ms ease;
   }
 
   .neo-button:hover {
-    transform: translate(4px, 4px);
     box-shadow: 4px 4px 0 0 #000;
+  }
+
+  .neo-label {
+    display: inline-flex;
+    border: 3px solid #050505;
+    background: #fff9e8;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.68rem;
+    font-weight: 950;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
   }
 }

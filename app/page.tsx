@@ -1,95 +1,111 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
-const fadeStagger = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.12 },
-  },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-};
-
-const projects = [
-  {
-    title: 'Selected work',
-    description: 'A handful of high-signal projects, experiments, and shipping habits.',
-  },
-  {
-    title: 'About',
-    description: 'Builder, operator, and product-minded engineer focused on crisp UX and fast execution.',
-  },
-  {
-    title: 'Contact',
-    description: 'Open to internships, freelance work, and ambitious side quests.',
-  },
-];
+import { MotionArticle, MotionGroup, MotionItem } from '@/components/site/motion-shell';
+import { SiteShell } from '@/components/site/site-shell';
+import { NeoButton } from '@/components/ui/neo-button';
+import { NeoCard } from '@/components/ui/neo-card';
+import { designTokens, featuredTiles, referenceFindings, siteConfig, stackItems } from '@/lib/site';
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.8),_transparent_32%),linear-gradient(180deg,#f5f0e8_0%,#efe5d3_100%)]">
-      <section className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-between px-5 py-6 sm:px-8 lg:px-12">
-        <motion.div variants={fadeStagger} initial="hidden" animate="show" className="space-y-8">
-          <motion.div variants={fadeUp} className="flex items-center justify-between gap-4 border-4 border-black bg-[#fffaf0] px-4 py-3 shadow-brut">
-            <div className="font-black uppercase tracking-[0.28em]">Neal</div>
-            <div className="text-xs font-bold uppercase tracking-[0.35em]">portfolio skeleton</div>
-          </motion.div>
-
-          <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-            <motion.div variants={fadeUp} className="neo-card p-6 sm:p-8 lg:p-10">
-              <p className="mb-4 text-xs font-black uppercase tracking-[0.3em]">Neo-brutalist personal site</p>
-              <h1 className="max-w-3xl text-5xl font-black uppercase leading-[0.9] tracking-[-0.04em] sm:text-6xl lg:text-8xl">
-                Sharp edges. Clean motion.
+    <SiteShell>
+      <MotionGroup as="section" className="grid flex-1 gap-5 lg:grid-cols-[1.35fr_0.65fr]" id="top">
+        <MotionItem variant="slam" className="min-h-[520px]">
+          <NeoCard className="flex h-full flex-col justify-between p-6 sm:p-8 lg:p-10" accent="bg-acid">
+            <div>
+              <p className="neo-label bg-cyan">Neo-brutalist personal site</p>
+              <h1 className="mt-7 max-w-5xl text-6xl font-black uppercase leading-[0.82] tracking-[-0.08em] sm:text-7xl lg:text-[8.6rem]">
+                Sharp edges. Human signal.
               </h1>
-              <p className="mt-6 max-w-2xl text-base font-medium leading-7 sm:text-lg">
-                This initial build sets up the portfolio with a bold visual system, Framer Motion entrances, and a Vercel-friendly Next.js foundation.
+              <p className="mt-6 max-w-2xl text-lg font-bold leading-8 sm:text-xl">
+                A live, adaptable portfolio foundation for {siteConfig.name}: loud typography, hard borders,
+                staggered motion, hover feedback, and a custom cursor layer inspired by motion-led creative portfolios.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <motion.a whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} href="#projects" className="neo-button inline-flex items-center">
-                  View work
-                </motion.a>
-                <motion.a whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} href="mailto:nealmalhotra2006@gmail.com" className="neo-button inline-flex items-center bg-[#ff9f68]">
-                  Contact
-                </motion.a>
-              </div>
-            </motion.div>
+            </div>
 
-            <motion.aside variants={fadeUp} className="neo-card flex flex-col justify-between p-6 sm:p-8">
-              <div>
-                <div className="text-xs font-black uppercase tracking-[0.3em]">Stack</div>
-                <ul className="mt-4 space-y-3 text-sm font-bold uppercase tracking-[0.18em]">
-                  <li>Next.js</li>
-                  <li>Tailwind CSS</li>
-                  <li>Framer Motion</li>
-                  <li>Vercel-ready</li>
-                </ul>
-              </div>
-              <div className="mt-8 border-t-4 border-black pt-4 text-sm font-medium leading-6">
-                Inspired by the bold, high-contrast feel of stefanvitasovic.dev with staggered motion and hard shadows.
-              </div>
-            </motion.aside>
-          </div>
-        </motion.div>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <NeoButton href="#work">View modules</NeoButton>
+              <NeoButton href={`mailto:${siteConfig.email}`} className="bg-coral">
+                Start a thread
+              </NeoButton>
+            </div>
+          </NeoCard>
+        </MotionItem>
 
-        <motion.section id="projects" variants={fadeStagger} initial="hidden" animate="show" className="mt-8 grid gap-4 md:grid-cols-3">
-          {projects.map((project) => (
-            <motion.article key={project.title} variants={fadeUp} whileHover={{ y: -4 }} className="neo-card p-5">
-              <h2 className="text-2xl font-black uppercase tracking-[-0.03em]">{project.title}</h2>
-              <p className="mt-3 text-sm font-medium leading-6">{project.description}</p>
-            </motion.article>
-          ))}
-        </motion.section>
+        <MotionItem className="grid gap-5">
+          <NeoCard className="p-5 sm:p-6" accent="bg-coral">
+            <p className="neo-label bg-paper">Stack</p>
+            <ul className="mt-5 grid gap-3">
+              {stackItems.map((item) => (
+                <li key={item} className="border-b-[3px] border-ink pb-2 text-xl font-black uppercase tracking-[-0.04em]">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </NeoCard>
 
-        <motion.footer variants={fadeUp} initial="hidden" animate="show" className="mt-6 flex flex-col gap-3 border-4 border-black bg-[#fffaf0] px-4 py-3 shadow-brut sm:flex-row sm:items-center sm:justify-between">
-          <span className="text-xs font-black uppercase tracking-[0.3em]">Initial skeleton live</span>
-          <span className="text-xs font-medium uppercase tracking-[0.25em]">Waiting on 2026 design meta before final architecture pass</span>
-        </motion.footer>
-      </section>
-    </main>
+          <NeoCard className="p-5 sm:p-6" accent="bg-cyan">
+            <p className="neo-label bg-acid">Architecture note</p>
+            <p className="mt-5 text-base font-bold leading-7">
+              This is intentionally a flexible skeleton. The final information architecture, media strategy, and
+              interaction depth should wait for the separate 2026 frontend design-meta research findings.
+            </p>
+          </NeoCard>
+        </MotionItem>
+      </MotionGroup>
+
+      <MotionGroup as="section" className="mt-5 grid gap-5 lg:grid-cols-3" id="work">
+        {featuredTiles.map((tile) => (
+          <MotionArticle
+            key={tile.title}
+            whileHover={{ y: -8, rotate: -0.35 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="neo-card min-h-[260px] p-5 sm:p-6"
+          >
+            <span className={`neo-label ${tile.accent}`}>{tile.eyebrow}</span>
+            <h2 className="mt-8 text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em]">{tile.title}</h2>
+            <p className="mt-5 text-base font-bold leading-7">{tile.description}</p>
+          </MotionArticle>
+        ))}
+      </MotionGroup>
+
+      <MotionGroup as="section" className="mt-5 grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
+        <MotionItem>
+          <NeoCard className="h-full p-5 sm:p-6" accent="bg-acid">
+            <p className="neo-label bg-paper">UI system</p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {designTokens.map((token) => (
+                <span key={token} className="neo-label bg-bone">
+                  {token}
+                </span>
+              ))}
+            </div>
+          </NeoCard>
+        </MotionItem>
+
+        <MotionItem>
+          <NeoCard className="p-5 sm:p-6" accent="bg-coral">
+            <p className="neo-label bg-cyan">Reference assumptions</p>
+            <ul className="mt-5 grid gap-4 text-sm font-bold leading-6 sm:text-base">
+              {referenceFindings.map((finding) => (
+                <li key={finding} className="border-l-[6px] border-ink bg-paper px-4 py-3 shadow-[5px_5px_0_0_#050505]">
+                  {finding}
+                </li>
+              ))}
+            </ul>
+          </NeoCard>
+        </MotionItem>
+      </MotionGroup>
+
+      <MotionGroup
+        as="footer"
+        className="neo-card mt-5 flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <MotionItem>
+          <span className="text-xs font-black uppercase tracking-[0.28em]">Vercel preview compatible</span>
+        </MotionItem>
+        <MotionItem>
+          <span className="text-xs font-bold uppercase tracking-[0.22em]">Next step: fold in 2026 research meta</span>
+        </MotionItem>
+      </MotionGroup>
+    </SiteShell>
   );
 }
