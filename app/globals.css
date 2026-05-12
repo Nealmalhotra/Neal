@@ -4,6 +4,12 @@
 
 :root {
   color-scheme: light;
+  --ink: #0a0a0a;
+  --cream: #f7f0df;
+  --paper: #fffaf0;
+  --acid: #d8ff3e;
+  --coral: #ff7f50;
+  --sky: #8fd8ff;
 }
 
 html {
@@ -12,27 +18,57 @@ html {
 
 body {
   margin: 0;
-  background: #f5f0e8;
-  color: #0a0a0a;
+  background: var(--cream);
+  color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 ::selection {
-  background: #0a0a0a;
-  color: #f5f0e8;
+  background: var(--ink);
+  color: var(--cream);
 }
 
 @layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .brut-grid {
+    background:
+      linear-gradient(rgba(10, 10, 10, 0.08) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(10, 10, 10, 0.08) 2px, transparent 2px),
+      radial-gradient(circle at top left, rgba(255, 127, 80, 0.42), transparent 32rem),
+      radial-gradient(circle at bottom right, rgba(143, 216, 255, 0.5), transparent 34rem),
+      var(--cream);
+    background-size:
+      36px 36px,
+      36px 36px,
+      auto,
+      auto,
+      auto;
+  }
+
   .neo-card {
-    @apply border-4 border-black bg-[#fffaf0] shadow-brut;
+    @apply border-4 border-black bg-paper shadow-brut;
+  }
+
+  .neo-panel {
+    @apply border-4 border-black bg-paper shadow-mini;
   }
 
   .neo-button {
-    @apply border-4 border-black bg-[#f7d54a] px-5 py-3 font-black uppercase tracking-[0.2em] text-sm shadow-brut transition-transform duration-200;
+    @apply inline-flex items-center border-4 border-black px-5 py-3 text-sm font-black uppercase tracking-[0.18em] shadow-brut outline-none transition-shadow duration-200 focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-4 focus-visible:ring-offset-cream;
   }
 
   .neo-button:hover {
-    transform: translate(4px, 4px);
     box-shadow: 4px 4px 0 0 #000;
+  }
+
+  .nav-chip {
+    @apply border-4 border-black bg-paper px-3 py-2 shadow-mini outline-none transition-colors duration-200 hover:bg-acid focus-visible:ring-4 focus-visible:ring-black;
+  }
+
+  .kicker {
+    @apply text-xs font-black uppercase tracking-[0.28em];
   }
 }
