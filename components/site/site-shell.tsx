@@ -5,20 +5,29 @@ import { siteConfig } from '@/lib/site';
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
     <>
+      <div aria-hidden className="line-grid" />
+      <div aria-hidden className="top-rect" />
+      <div aria-hidden className="bottom-rect" />
       <CustomCursor />
-      <main className="min-h-screen">
-        <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
-          <header className="neo-card z-10 mb-5 flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-            <a href="#top" className="font-black uppercase tracking-[0.28em]">
-              {siteConfig.name}
-            </a>
-            <div className="flex flex-wrap gap-2">
-              <span className="neo-label bg-acid">{siteConfig.status}</span>
-              <span className="neo-label bg-paper">Research pending</span>
-            </div>
-          </header>
-          {children}
-        </div>
+      <div className="fixed bottom-[var(--indent)] left-[var(--indent)] z-30 text-[0.72rem] font-black uppercase tracking-[0.12em] text-accent mix-blend-multiply">
+        Loading / live skeleton
+      </div>
+      <nav className="fixed right-[var(--indent)] top-[var(--indent)] z-30 text-right text-[0.72rem] font-black uppercase leading-[1.15] tracking-[0.14em]">
+        <a className="block transition-colors hover:text-accent" href="#top">
+          {siteConfig.shortName}
+        </a>
+        <a className="block transition-colors hover:text-accent" href="#projects">
+          Projects
+        </a>
+        <a className="block transition-colors hover:text-accent" href="#about">
+          About
+        </a>
+        <a className="block transition-colors hover:text-accent" href={`mailto:${siteConfig.email}`}>
+          Contact
+        </a>
+      </nav>
+      <main className="relative z-10 min-h-screen px-[var(--indent)]">
+        {children}
       </main>
     </>
   );

@@ -33,10 +33,22 @@ export function CustomCursor() {
   }
 
   return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-50 hidden size-7 rounded-full border-[3px] border-ink bg-acid mix-blend-multiply shadow-[4px_4px_0_0_#050505] md:block"
-      style={{ x: springX, y: springY }}
-    />
+    <>
+      <motion.div
+        aria-hidden
+        className="pointer-events-none fixed left-0 top-0 z-50 hidden size-7 rounded-full border border-accent bg-aux/20 mix-blend-exclusion md:block"
+        style={{ x: springX, y: springY }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none fixed left-0 top-0 z-50 hidden h-px w-16 -translate-x-4 translate-y-[14px] bg-accent/70 mix-blend-multiply md:block"
+        style={{ x: springX, y: springY }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none fixed left-0 top-0 z-50 hidden h-16 w-px translate-x-[14px] -translate-y-4 bg-accent/70 mix-blend-multiply md:block"
+        style={{ x: springX, y: springY }}
+      />
+    </>
   );
 }
