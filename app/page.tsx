@@ -1,95 +1,129 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
-const fadeStagger = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.12 },
-  },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-};
-
-const projects = [
-  {
-    title: 'Selected work',
-    description: 'A handful of high-signal projects, experiments, and shipping habits.',
-  },
-  {
-    title: 'About',
-    description: 'Builder, operator, and product-minded engineer focused on crisp UX and fast execution.',
-  },
-  {
-    title: 'Contact',
-    description: 'Open to internships, freelance work, and ambitious side quests.',
-  },
-];
+import { ArtField } from '@/components/site/art-field';
+import { AvailabilityTicker } from '@/components/site/availability-ticker';
+import { MotionGroup, MotionItem } from '@/components/site/motion-shell';
+import { ProjectReel } from '@/components/site/project-reel';
+import { SiteShell } from '@/components/site/site-shell';
+import { CharReveal, SlicedText } from '@/components/site/sliced-text';
+import { NeoButton } from '@/components/ui/neo-button';
+import { awards, designTokens, referenceFindings, siteConfig, stackItems } from '@/lib/site';
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.8),_transparent_32%),linear-gradient(180deg,#f5f0e8_0%,#efe5d3_100%)]">
-      <section className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-between px-5 py-6 sm:px-8 lg:px-12">
-        <motion.div variants={fadeStagger} initial="hidden" animate="show" className="space-y-8">
-          <motion.div variants={fadeUp} className="flex items-center justify-between gap-4 border-4 border-black bg-[#fffaf0] px-4 py-3 shadow-brut">
-            <div className="font-black uppercase tracking-[0.28em]">Neal</div>
-            <div className="text-xs font-bold uppercase tracking-[0.35em]">portfolio skeleton</div>
-          </motion.div>
+    <SiteShell>
+      <MotionGroup
+        as="section"
+        className="relative flex min-h-screen flex-col justify-between overflow-hidden pb-[calc(var(--indent)*2)] pt-[calc(var(--indent)*7)]"
+        id="top"
+      >
+        <ArtField />
+        <div className="grid gap-[var(--indent)] lg:grid-cols-12">
+          <MotionItem className="lg:col-span-7 lg:col-start-1">
+            <p className="reveal-mask mb-[var(--indent)] text-xs font-black uppercase leading-none tracking-[0.18em] text-accent">
+              <span>Design-driven builder / motion-led interfaces</span>
+            </p>
+            <h1 className="text-[clamp(4.6rem,16vw,17rem)] font-black lowercase leading-[0.78] tracking-[-0.11em]">
+              <SlicedText text="neal" delay={0.08} />
+              <SlicedText text="malhotra" delay={0.2} />
+            </h1>
+          </MotionItem>
 
-          <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-            <motion.div variants={fadeUp} className="neo-card p-6 sm:p-8 lg:p-10">
-              <p className="mb-4 text-xs font-black uppercase tracking-[0.3em]">Neo-brutalist personal site</p>
-              <h1 className="max-w-3xl text-5xl font-black uppercase leading-[0.9] tracking-[-0.04em] sm:text-6xl lg:text-8xl">
-                Sharp edges. Clean motion.
-              </h1>
-              <p className="mt-6 max-w-2xl text-base font-medium leading-7 sm:text-lg">
-                This initial build sets up the portfolio with a bold visual system, Framer Motion entrances, and a Vercel-friendly Next.js foundation.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <motion.a whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} href="#projects" className="neo-button inline-flex items-center">
-                  View work
-                </motion.a>
-                <motion.a whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} href="mailto:nealmalhotra2006@gmail.com" className="neo-button inline-flex items-center bg-[#ff9f68]">
-                  Contact
-                </motion.a>
-              </div>
-            </motion.div>
+          <MotionItem className="lg:col-span-4 lg:col-start-9 lg:self-end">
+            <p className="max-w-[31rem] text-[clamp(1.35rem,2.7vw,3rem)] font-black leading-[0.95] tracking-[-0.06em]">
+              A sharper portfolio skeleton borrowing Stefan Vitasovic’s strongest motifs: sliced type, sparse chrome,
+              numbered media, noisy grids, and motion that feels like a system.
+            </p>
+          </MotionItem>
+        </div>
 
-            <motion.aside variants={fadeUp} className="neo-card flex flex-col justify-between p-6 sm:p-8">
-              <div>
-                <div className="text-xs font-black uppercase tracking-[0.3em]">Stack</div>
-                <ul className="mt-4 space-y-3 text-sm font-bold uppercase tracking-[0.18em]">
-                  <li>Next.js</li>
-                  <li>Tailwind CSS</li>
-                  <li>Framer Motion</li>
-                  <li>Vercel-ready</li>
-                </ul>
-              </div>
-              <div className="mt-8 border-t-4 border-black pt-4 text-sm font-medium leading-6">
-                Inspired by the bold, high-contrast feel of stefanvitasovic.dev with staggered motion and hard shadows.
-              </div>
-            </motion.aside>
+        <div className="grid items-end gap-[var(--indent)] lg:grid-cols-12">
+          <MotionItem className="lg:col-span-3">
+            <p className="text-sm font-black uppercase leading-[1.1] tracking-[0.12em]">
+              {siteConfig.status}: 2026.
+            </p>
+          </MotionItem>
+          <MotionItem className="lg:col-span-4 lg:col-start-7">
+            <div className="flex flex-wrap gap-3">
+              <NeoButton href="#projects">Scroll into projects</NeoButton>
+              <NeoButton href={`mailto:${siteConfig.email}`} className="bg-accent text-aux">
+                Email
+              </NeoButton>
+            </div>
+          </MotionItem>
+        </div>
+      </MotionGroup>
+
+      <ProjectReel />
+
+      <MotionGroup as="section" className="grid min-h-screen gap-[var(--indent)] py-[calc(var(--indent)*5)] lg:grid-cols-12" id="about">
+        <MotionItem className="text-right lg:col-span-4">
+          <div className="text-[clamp(5rem,17vw,18rem)] font-black lowercase leading-[0.74] tracking-[-0.12em] text-accent">
+            <CharReveal text={siteConfig.shortName.split(' ')[0]} />
+            <CharReveal text={siteConfig.shortName.split(' ')[1]} delay={0.1} />
           </div>
-        </motion.div>
+        </MotionItem>
 
-        <motion.section id="projects" variants={fadeStagger} initial="hidden" animate="show" className="mt-8 grid gap-4 md:grid-cols-3">
-          {projects.map((project) => (
-            <motion.article key={project.title} variants={fadeUp} whileHover={{ y: -4 }} className="neo-card p-5">
-              <h2 className="text-2xl font-black uppercase tracking-[-0.03em]">{project.title}</h2>
-              <p className="mt-3 text-sm font-medium leading-6">{project.description}</p>
-            </motion.article>
-          ))}
-        </motion.section>
+        <MotionItem className="lg:col-span-4 lg:col-start-6">
+          <p className="text-[clamp(1.25rem,2.2vw,2.5rem)] font-black leading-[1] tracking-[-0.055em]">
+            The reference about page works because it feels editorial: huge cropped identity type, dense but direct
+            columns, masked reveals, and award/stat lists. This section sets up that same structure for real content.
+          </p>
+          <div className="mt-[calc(var(--indent)*2)] grid gap-2">
+            {stackItems.map((item) => (
+              <span className="reveal-mask border-b border-ink pb-2 text-xs font-black uppercase tracking-[0.14em]" key={item}>
+                {item}
+              </span>
+            ))}
+          </div>
+        </MotionItem>
 
-        <motion.footer variants={fadeUp} initial="hidden" animate="show" className="mt-6 flex flex-col gap-3 border-4 border-black bg-[#fffaf0] px-4 py-3 shadow-brut sm:flex-row sm:items-center sm:justify-between">
-          <span className="text-xs font-black uppercase tracking-[0.3em]">Initial skeleton live</span>
-          <span className="text-xs font-medium uppercase tracking-[0.25em]">Waiting on 2026 design meta before final architecture pass</span>
-        </motion.footer>
-      </section>
-    </main>
+        <MotionItem className="lg:col-span-3 lg:col-start-10">
+          <div className="grid gap-[var(--indent)]">
+            {awards.map(([label, value]) => (
+              <div className="border-t border-ink pt-3" key={label}>
+                <p className="text-xs font-black uppercase tracking-[0.14em] text-ink/55">{label}</p>
+                <p className="text-[clamp(2rem,5vw,5.5rem)] font-black uppercase leading-[0.8] tracking-[-0.08em]">{value}</p>
+              </div>
+            ))}
+          </div>
+        </MotionItem>
+      </MotionGroup>
+
+      <MotionGroup as="section" className="grid gap-[var(--indent)] py-[calc(var(--indent)*4)] lg:grid-cols-12">
+        <MotionItem className="lg:col-span-4">
+          <h2 className="text-[clamp(3rem,8vw,8rem)] font-black uppercase leading-[0.78] tracking-[-0.09em]">
+            Elements borrowed, not copied.
+          </h2>
+        </MotionItem>
+        <MotionItem className="lg:col-span-4 lg:col-start-6">
+          <ul className="grid gap-3">
+            {referenceFindings.map((finding) => (
+              <li className="border-l-4 border-accent bg-aux/70 py-2 pl-4 text-sm font-black leading-[1.15]" key={finding}>
+                {finding}
+              </li>
+            ))}
+          </ul>
+        </MotionItem>
+        <MotionItem className="lg:col-span-2 lg:col-start-11">
+          <div className="flex flex-wrap gap-2">
+            {designTokens.map((token) => (
+              <span className="neo-label" key={token}>
+                {token}
+              </span>
+            ))}
+          </div>
+        </MotionItem>
+      </MotionGroup>
+
+      <AvailabilityTicker />
+
+      <MotionGroup as="footer" className="grid gap-[var(--indent)] py-[calc(var(--indent)*2)] text-xs font-black uppercase tracking-[0.12em] lg:grid-cols-12">
+        <MotionItem className="lg:col-span-4">
+          <span>Vercel preview compatible / Next.js + Tailwind + Motion</span>
+        </MotionItem>
+        <MotionItem className="lg:col-span-4 lg:col-start-7">
+          <span>Still waiting on the separate 2026 frontend design-meta research before WebGL/page-transition architecture.</span>
+        </MotionItem>
+      </MotionGroup>
+    </SiteShell>
   );
 }
